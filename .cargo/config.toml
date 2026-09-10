@@ -1,4 +1,4 @@
-[target.thumbv8m.main-none-eabihf]
+[target.thumbv6m-none-eabi]
 # Choose a default "cargo run" tool (see README for more info)
 # - `probe-rs` provides flashing and defmt via a hardware debugger, and stack unwind on panic
 # - `picotool` loads an elf, skipping unchanged flash sectors, verify it, and execute it
@@ -12,12 +12,14 @@ runner = "picotool load -u -v -x -t elf"
 #   This is usually provided by the cortex-m-rt crate, and by default the
 #   version in that crate will include a file called `memory.x` which describes
 #   the particular memory layout for your specific chip.
+# * linker argument -Tlink-rp.x is provided by embassy-rp and places the RP2040
+#   second-stage bootloader (boot2) into the `.boot2` section defined in memory.x.
 rustflags = [
     "-C", "link-arg=--nmagic",
     "-C", "link-arg=-Tlink.x",
-    "-C", "target-cpu=cortex-m33",
+    "-C", "link-arg=-Tlink-rp.x",
 ]
 linker = "rust-lld"
 
 [build]
-target = "thumbv8m.main-none-eabihf"
+target = "thumbv6m-none-eabi"

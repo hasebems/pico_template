@@ -15,8 +15,6 @@ use embassy_rp::multicore::{Stack, spawn_core1};
 use embassy_sync::channel::Channel;
 use embassy_time::Timer;
 
-use rp235x_hal::{self as hal};
-
 use embassy_rp::bind_interrupts;
 use embassy_rp::dma::InterruptHandler as DmaInterruptHandler;
 use embassy_rp::gpio::{Level, Output};
@@ -61,11 +59,6 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
         asm::nop();
     }
 }
-
-/// Tell the Boot ROM about our application
-#[unsafe(link_section = ".start_block")]
-#[used]
-pub static IMAGE_DEF: hal::block::ImageDef = hal::block::ImageDef::secure_exe();
 
 // Core1 stack
 static mut CORE1_STACK: Stack<8192> = Stack::new();
@@ -449,15 +442,4 @@ async fn oled_ui_task() {
         Timer::after_millis(delay).await;
     }
 }
-
-/// Program metadata for `picotool info`
-#[unsafe(link_section = ".bi_entries")]
-#[used]
-pub static PICOTOOL_ENTRIES: [rp235x_hal::binary_info::EntryAddr; 5] = [
-    rp235x_hal::binary_info::rp_cargo_bin_name!(),
-    rp235x_hal::binary_info::rp_cargo_version!(),
-    rp235x_hal::binary_info::rp_program_description!(c"RP2350 Template"),
-    rp235x_hal::binary_info::rp_cargo_homepage_url!(),
-    rp235x_hal::binary_info::rp_program_build_attribute!(),
-];
 // End of file

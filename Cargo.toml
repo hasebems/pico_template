@@ -9,7 +9,7 @@ embassy-embedded-hal = { git = "https://github.com/embassy-rs/embassy.git", bran
 embassy-sync = { git = "https://github.com/embassy-rs/embassy.git", branch = "main" }
 embassy-executor = { git = "https://github.com/embassy-rs/embassy.git", branch = "main", features = ["arch-cortex-m", "executor-thread", "executor-interrupt"] }
 embassy-time = { git = "https://github.com/embassy-rs/embassy.git", branch = "main" }
-embassy-rp = { git = "https://github.com/embassy-rs/embassy.git", branch = "main", default-features = false, features = ["time-driver", "critical-section-impl", "rp235xa", "binary-info"] }
+embassy-rp = { git = "https://github.com/embassy-rs/embassy.git", branch = "main", default-features = false, features = ["time-driver", "critical-section-impl", "rp2040"] }
 embassy-usb = { git = "https://github.com/embassy-rs/embassy.git", branch = "main" }
 embassy-futures = { git = "https://github.com/embassy-rs/embassy.git", branch = "main" }
 
@@ -54,14 +54,9 @@ embedded-sdmmc = "0.7.0"
 # Enable generation of debug symbols even on release builds
 #debug = true
 
-# If you're not going to use a Board Support Package you'll need these:
-rp235x-hal = { version = "0.3", features = [
-  "binary-info",
-] }
-
 [package.metadata.embassy]
 build = [
-  { target = "thumbv8m.main-none-eabihf", artifact-dir = "out/rp235x" }
+  { target = "thumbv6m-none-eabi", artifact-dir = "out/rp2040" }
 ]
 
 # cargo build/run

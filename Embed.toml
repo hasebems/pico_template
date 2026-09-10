@@ -18,9 +18,8 @@ enabled = true
 halt_afterwards = false
 
 [default.general]
-chip = "RP235x"
+chip = "RP2040"
 log_level = "WARN"
-# RP2350 does not support connect_under_reset?
 connect_under_reset = false
 
 [default.rtt]
