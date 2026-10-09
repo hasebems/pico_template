@@ -2,7 +2,7 @@
 
 ## 概要
 
-- Seeed XIAO RP2040 を組み込みRustで動作させます
+- Raspberry pi pico (RP2040) を組み込みRustで動作させます
 - 擬似マルチタスク Embassy を Multicore 上で動作させるためのテンプレートです
 - 主に GPIO, I2C, USB MIDI 等の下回りにアクセスする処理を提供します
 
